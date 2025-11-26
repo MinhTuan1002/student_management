@@ -3,25 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <title>student management</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <script src="script.js"></script>
     <link rel="stylesheet" href="css.css">
 </head>
 <body>
-<img src="thiet-ke-thuong-hieu-hoc-vien-quan-ly-phat-trien-tp-hcm-dma_logo_1361785152.jpg" id="logo" style="width: 1800px; height: 600px; object-fit: cover;">
+<img src="thiet-ke-thuong-hieu-hoc-vien-quan-ly-phat-trien-tp-hcm-dma_logo_1361785152.jpg" id="logo" style="width: 600px; height: 200px; object-fit: cover;">
 <h1>QUẢN LÝ HỌC VIÊN</h1>
 
 <div class="container">
     <div class="box">
         <div class="title">Thông tin học viên</div>
         <table>
-            <tr><td>ID</td><td><input id="id"></td></tr>
-            <tr><td>Họ tên</td><td><input id="name"></td></tr>
-            <tr><td>Ngày sinh</td><td><input id="dob" type="date"></td></tr>
-            <tr><td>Giới tính</td><td><input id="gender"></td></tr>
-            <tr><td>Lớp</td><td><input id="class"></td></tr>
+            <tr>
+                <td>ID</td>
+                <td><input id="id"></td>
+            </tr>
+            <tr>
+                <td>Họ tên</td>
+                <td><input id="name"></td>
+            </tr>
+            <tr>
+                <td>Ngày sinh</td>
+                <td><input id="dob" type="date"></td>
+            </tr>
+            <tr>
+                <td>Giới tính</td>
+                <td>
+                    <select id="gender">
+                        <option value="">--Chọn--</option>
+                        <option value="Nam">Nam</option>
+                        <option value="Nữ">Nữ</option>
+                        <option value="Khác">Khác</option>
+                    </select>
+
+                </td>
+            </tr>
+            <tr>
+                <td><label>Lớp</label></td>
+                <td>
+                    <select id="class">
+                        <option value="THA">THA</option>
+                        <option value="THB">THB</option>
+                        <option value="THC">THC</option>
+                        <option value="THD">THD</option>
+                        <option value="THE">THE</option>
+                        <option value="THF">THF</option>
+                        <option value="THG">THG</option>
+                        <option value="THH">THH</option>
+                    </select>
+                </td>
+            </tr>
             <tr><td>Ảnh</td><td><input id="img" type="file" accept="image/*" onchange="loadImage(event)"></td></tr>
-            <tr><td>Preview</td><td><img id="preview" style="width:60px;height:80px;object-fit:cover;border:1px solid #ccc;"></td></tr>
+            <tr>
+                <td>Preview</td>
+                <td><img id="preview" style="width:60px;height:80px;object-fit:cover;border:1px solid #ccc;"></td>
+            </tr>
             <tr>
                 <td colspan="2" style="text-align:center;">
                     <button class="btn add" onclick="addStudent()">Thêm</button>
@@ -42,6 +79,84 @@
                 <th>Lớp</th>
                 <th>Ảnh</th>
                 <th>Tùy chọn</th>
+            </tr>
+            <tr>
+                <td>15</td>
+                <td>Nguyễn Hoàng Anh</td>
+                <td>15-12-2000</td>
+                <td>Nam</td>
+                <td>THB</td>
+                <td><img src="hoang-anh.jpg"></td>
+                <td><button class='btn edit' onclick='editStudent()'><i class="fa-solid fa-pen-to-square"></i></button>
+                    <button class='btn delete' onclick='deleteStudent()'><i class="fa-solid fa-trash-can"></i></button>
+                </td>
+            </tr>
+            <tr>
+                <td>18</td>
+                <td>Nguyễn Bùi Tuấn Anh</td>
+                <td>10-05-2002</td>
+                <td>Nam</td>
+                <td>THA</td>
+                <td><img src="tuan-anh.jpg"></td>
+                <td><button class="btn edit" onclick="editStudent()"><i class="fa-solid fa-pen-to-square"></i></button>
+                    <button class="btn delete" onclick="deleteStudent()"><i class="fa-solid fa-trash-can"></i></button>
+                </td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>Lê Nguyễn Thanh Bình</td>
+                <td>04-07-2003</td>
+                <td>Nữ</td>
+                <td>THE</td>
+                <td><img src="tải%20xuống.jfif"></td>
+                <td><button class="btn edit" onclick="editStudent()"><i class="fa-solid fa-pen-to-square"></i></button>
+                    <button class="btn delete" onclick="deleteStudent()"><i class="fa-solid fa-trash-can"></i></button>
+                </td>
+            </tr>
+            <tr>
+                <td>04</td>
+                <td>Đinh Thị Duyên</td>
+                <td>19-11-2001</td>
+                <td>Nữ</td>
+                <td>THD</td>
+                <td><img src="Screenshot%202025-11-26%20113833.png"></td>
+                <td><button class="btn edit" onclick="editStudent()"><i class="fa-solid fa-pen-to-square"></i></button>
+                    <button class="btn delete" onclick="deleteStudent()"><i class="fa-solid fa-trash-can"></i></button>
+
+                </td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>Nguyễn Thị Kiều Duyên</td>
+                <td>15-02-2003</td>
+                <td>Nữ</td>
+                <td>THE</td>
+                <td><img src="kieu-duyen.jpeg"></td>
+                <td><button class="btn edit" onclick="editStudent()"><i class="fa-solid fa-pen-to-square"></i></button>
+                    <button class="btn delete" onclick="deleteStudent()"><i class="fa-solid fa-trash-can"></i></button>
+                </td>
+            </tr>
+            <tr>
+                <td>06</td>
+                <td>Lâm Thanh Trúc</td>
+                <td>15-02-2003</td>
+                <td>Nữ</td>
+                <td>THE</td>
+                <td><img src="anh-the-truc.webp"></td>
+                <td><button class="btn edit" onclick="editStudent()"><i class="fa-solid fa-pen-to-square"></i></button>
+                    <button class="btn delete" onclick="deleteStudent()"><i class="fa-solid fa-trash-can"></i></button>
+                </td>
+            </tr>
+            <tr>
+                <td>20</td>
+                <td>Nguyễn Thanh Tùng</td>
+                <td>15-06-2000</td>
+                <td>Nam</td>
+                <td>THH</td>
+                <td><img src="5e6c572eed026b75f81682e02f83a983.jpg"></td>
+                <td><button class="btn edit" onclick="editStudent()"><i class="fa-solid fa-pen-to-square"></i></button>
+                    <button class="btn delete" onclick="deleteStudent()"><i class="fa-solid fa-trash-can"></i></button>
+                </td>
             </tr>
             </thead>
             <tbody id="list"></tbody>

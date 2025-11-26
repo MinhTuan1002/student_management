@@ -9,16 +9,26 @@ function addStudent(){
         class: document.getElementById('class').value,
         img: selectedImage
     };
-    if(!s.id || !s.name){ alert('Vui lòng nhập ID và Họ tên'); return; }
+    let dob = document.getElementById('dob').value;
+
+    if (calculateAge(dob) < 18) {
+        alert("Học sinh chưa đủ 18 tuổi!");
+        return;
+    }
     students.push(s);
+    alert("Thêm học viên thành công!");
     render();
 }
 function editStudent(i){
     students.splice(i,1);
+    alert("Cập nhật học viên thành công!");
     render();
 }
 function deleteStudent(i){
+    const ok = confirm("Bạn có chắc chắn muốn xoá học viên này không?");
+    if (!ok) return;
     students.splice(i,1);
+    alert("Xoá học viên thành công!");
     render();
 }
 function render(){
@@ -28,7 +38,7 @@ function render(){
             <tr>
                 <td>${s.id}</td>
                 <td>${s.name}</td>
-                <td>${s.dob}</td>
+                <td>${formatDate(s.dob)}</td>
                 <td>${s.gender}</td>
                 <td>${s.class}</td>
                 <td><img src="${s.img}"></td>
@@ -40,6 +50,24 @@ function render(){
     });
     document.getElementById('list').innerHTML = html;
 }
+function formatDate(dateString) {
+    const [year, month, day] = dateString.split("-");
+    return `${day}-${month}-${year}`;
+}
+function calculateAge(dob) {
+    const [year, month, day] = dob.split("-").map(Number);
+    const today = new Date();
+    let age = today.getFullYear() - year;
+
+    if (
+        today.getMonth() + 1 < month ||
+        (today.getMonth() + 1 === month && today.getDate() < day)
+    ) {
+        age--;
+    }
+    return age;
+}
+
 function loadImage(event){
     let reader = new FileReader();
     reader.onload = function(){
@@ -48,5 +76,5 @@ function loadImage(event){
     }
     reader.readAsDataURL(event.target.files[0]);
 }
-window.localStorage.setItem('students',JSON.stringify(students));
+window.localStorage.setItem('students' , JSON.stringify(students));
 render();
