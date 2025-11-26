@@ -51,9 +51,12 @@ function render(){
     document.getElementById('list').innerHTML = html;
 }
 function formatDate(dateString) {
+    if (!dateString) return "";
     const [year, month, day] = dateString.split("-");
+    if (!year || !month || !day) return "";
     return `${day}-${month}-${year}`;
 }
+
 function calculateAge(dob) {
     const [year, month, day] = dob.split("-").map(Number);
     const today = new Date();
