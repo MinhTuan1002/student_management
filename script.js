@@ -1,6 +1,5 @@
 let students = [];
 let selectedImage = "";
-
 function addStudent(){
     let s = {
         id: document.getElementById('id').value,
@@ -10,18 +9,18 @@ function addStudent(){
         class: document.getElementById('class').value,
         img: selectedImage
     };
-
     if(!s.id || !s.name){ alert('Vui lòng nhập ID và Họ tên'); return; }
-
     students.push(s);
     render();
 }
-
+function editStudent(i){
+    students.splice(i,1);
+    render();
+}
 function deleteStudent(i){
     students.splice(i,1);
     render();
 }
-
 function render(){
     let html = '';
     students.forEach((s,i)=>{
@@ -33,7 +32,10 @@ function render(){
                 <td>${s.gender}</td>
                 <td>${s.class}</td>
                 <td><img src="${s.img}"></td>
-                <td><button class='btn delete' onclick='deleteStudent(${i})'>Xóa</i></i></button></td>
+                <td>
+                <button class='btn edit' onclick='editStudent(${i})'><i class="fa-solid fa-pen-to-square"></i></button>
+                <button class='btn delete' onclick='deleteStudent(${i})'><i class="fa-solid fa-trash-can"></i></i></i></button>
+                </td>              
             </tr>`;
     });
     document.getElementById('list').innerHTML = html;
@@ -46,3 +48,5 @@ function loadImage(event){
     }
     reader.readAsDataURL(event.target.files[0]);
 }
+window.localStorage.setItem('students',JSON.stringify(students));
+render();
